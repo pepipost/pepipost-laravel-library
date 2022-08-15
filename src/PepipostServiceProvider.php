@@ -11,20 +11,9 @@ class PepipostServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $source = realpath($raw = __DIR__.'/../config/tinker.php') ?: $raw;
-
-        /*if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
-            $this->publishes([$source => config_path('tinker.php')]);
-        } elseif ($this->app instanceof LumenApplication) {
-            $this->app->configure('tinker');
-        }
-
-        $this->mergeConfigFrom($source, 'tinker');*/
-        // $this->mergeConfigFrom(__DIR__.'/Configuration.php', 'pepimailer');
         $this->publishes([
-            __DIR__.'/Configuration.php' => config_path('pepimailer.php')
-        ], 'pepimailer-config');
-        // $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+            __DIR__.'/config/api.php' => config_path('pepipost.php')
+        ], 'config');
     }
 
     /**
@@ -39,9 +28,9 @@ class PepipostServiceProvider extends ServiceProvider
         // });
 
         // $this->commands(['command.tinker']);
-        $this->app->bind('pepipostmailer', function($app)
+        $this->app->bind('pepipost-lib', function($app)
         {
-            return new Pepipostmailer();
+            return new PepipostLib();
         });
     }
 }

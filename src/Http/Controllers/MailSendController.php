@@ -16,6 +16,7 @@ use Pepipost\PepipostLib\HttpRequest\HttpRequest;
 use Pepipost\PepipostLib\HttpRequest\HttpResponse;
 use Pepipost\PepipostLib\HttpRequest\HttpMethod;
 use Pepipost\PepipostLib\HttpRequest\HttpContext;
+use Illuminate\Support\Facades\Config;
 use Unirest\Request;
 
 /**
@@ -63,9 +64,10 @@ class MailSendController extends BaseController
         $_headers = array (
             'user-agent'    => BaseController::USER_AGENT,
             'content-type'  => 'application/json; charset=utf-8',
-            'api_key' => Configuration::$apiKey
+            'api_key' => config('pepipost.api_key')
         );
 
+        var_dump(Config::get('pepipost.api_key'));
         //json encode body
         $_bodyJson = Request\Body::Json($body);
         
