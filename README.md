@@ -22,7 +22,6 @@ For any update of this library check [Releases](https://github.com/pepipost/lara
 # Table of Content
   
 * [Installation](#installation)
-* [Quick Start](#quick-start)
 * [Usage of library in Project](#inproject)
 * [Announcements](#announcements)
 * [Roadmap](#roadmap)
@@ -103,6 +102,11 @@ $ composer require pepipost/pepipost-lib
                 $body->content[0] = new Models\Content;
                 $body->content[0]->type = Models\TypeEnum::HTML;
                 $body->content[0]->value = '<html><body>Hello, Welcome to Pepipost Family àèìòù.<br>My name is [% name %].<br>my love is sending [% love %]</body> <br></html>';
+
+                $body->attachments[0] = new Models\Attachments;
+                $body->attachments[0]->attach(storage_path('Discussions.pdf'));
+                #optional
+                $body->attachments[0]->name = 'discussionwithteam.pdf';
         
                 $body->personalizations = array();
                 $body->personalizations[0] = new Models\Personalizations;
@@ -121,9 +125,9 @@ $ composer require pepipost/pepipost-lib
         
                 $mailer = new Mailer();
                 try {
-                    var_dump($mailer->sendMail($body));
+                  var_dump($mailer->sendMail($body));
                 } catch (Pepipost\PepipostLib\APIException $e) {
-                    return $e->getMessage;
+                  return $e->getMessage;
                 }
             }
         }

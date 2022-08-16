@@ -38,7 +38,16 @@ class Attachments implements JsonSerializable
             $this->name    = func_get_arg(1);
         }
     }
-
+    
+    /**
+     * file content extractor
+     * @param string $file_path Path of the file to be sent to the email
+     */
+    public function attach($file_path)
+    {
+        $this->name = basename($file_path);
+        $this->content = base64_encode(file_get_contents($file_path));
+    }
 
     /**
      * Encode this object to JSON
