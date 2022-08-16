@@ -67,7 +67,6 @@ class MailSendController extends BaseController
             'api_key' => config('pepipost.api_key')
         );
 
-        var_dump(Config::get('pepipost.api_key'));
         //json encode body
         $_bodyJson = Request\Body::Json($body);
         
@@ -89,25 +88,8 @@ class MailSendController extends BaseController
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
         }
 
-        //Error handling using HTTP status codes
-        if ($response->code == 400) {
-            throw new APIException('API Response', $_httpContext);
-        }
-
-        if ($response->code == 401) {
-            throw new APIException('API Response', $_httpContext);
-        }
-
-        if ($response->code == 403) {
-            throw new APIException('API Response', $_httpContext);
-        }
-
-        if ($response->code == 405) {
-            throw new APIException('Invalid input', $_httpContext);
-        }
-
         //handle errors defined at the API level
-        $this->validateResponse($_httpResponse, $_httpContext);
+        // $this->validateResponse($_httpResponse, $_httpContext);
 
         return $response->body;
     }

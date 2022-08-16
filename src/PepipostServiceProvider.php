@@ -1,7 +1,6 @@
 <?php
 namespace Pepipost\PepipostLib;
 use Illuminate\Support\ServiceProvider;
-// use Pepipost\PepipostLib\PepipostMailer;
 class PepipostServiceProvider extends ServiceProvider
 {
   /**
@@ -23,11 +22,6 @@ class PepipostServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->app->singleton('command.tinker', function () {
-        //     return new TinkerCommand;
-        // });
-
-        // $this->commands(['command.tinker']);
         $this->app->bind('pepipost-lib', function($app)
         {
             return new PepipostLib();
